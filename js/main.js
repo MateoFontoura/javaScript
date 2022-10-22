@@ -31,14 +31,14 @@ if (nombre()) {
                 alert('Su ganacia si el Madrid gana seria de $ ' + deposito);
                 break;
             case '2':
-                deposito = parseInt(prompt('Ingresa monto a apostar'));
-                deposito = deposito * 2;
-                alert('Su ganacia si el partido termina en empate seria de $ ' + deposito);
+                plata = parseInt(prompt('Ingresa monto a apostar'));
+                plata = plata * 2;
+                alert('Su ganacia si el partido termina en empate seria de $ ' + plata);
                 break;
             case '3':
-                deposito = parseInt(prompt('Ingresa monto a apostar'));
-                deposito = deposito * 1.2;
-                alert('Su ganacia si el Barcelona gana seria de $ ' + deposito);
+                cash = parseInt(prompt('Ingresa monto a apostar'));
+                cash = cash * 1.2;
+                alert('Su ganacia si el Barcelona gana seria de $ ' + cash);
                 break;
             default:
                 alert('Elige una opcion correcta');
