@@ -1,74 +1,192 @@
-class Partido{
-    constructor(equipo, goles, ganador,id){
-        this.equipo = equipo;
-        this.goles = parseInt(goles);
-        this.ganador = ganador;
-        this.id = id;
+
+
+
+const usuarios = [{
+    nombre: 'Azul',
+    mail: 'azulperez@mail.com',
+    pass: 'azulcomoelmarazul'
+},
+{
+    nombre: 'Betiana',
+    mail: 'betidicarlo@mail.com',
+    pass: 'sha23AWx!'
+},
+{
+    nombre: 'Carlos',
+    mail: 'lopezcarlosadrian@mail.com',
+    pass: 'sanlore2002'
+},
+{
+    nombre: 'Mateo',
+    mail: 'mateofontoura@mail.com', 
+    pass: '123456'
+}]
+
+const partidos = [{
+    partido: "Real Madrid vs Barcelona",
+    liga: "Española",
+    posibleResultado: '2-0',
+    fecha:'18/12/2022 a las 15:00 uru',
+    img: './img/realmadrid.jpg'
+}, {
+    partido: "Nacional vs Peñarol",
+    liga: "Uruguaya",
+    posibleResultado: '1-1',
+    fecha:'09/12/2022 a las 17:00 uru',
+    img: './img/nacional.webp'
+}, {
+    partido: "Uruguay vs Argentina",
+    liga: "Eliminatorias",
+    posibleResultado: '1-2',
+    fecha:'05/03/2023 a las 21:00 uru',
+    img: './img/argentina.webp'
+}, {
+    partido: "Chelsea vs Porto",
+    liga: "Liga de Campeones",
+    posibleResultado: '3-1',
+    fecha:'15/12/2022 a las 17:00 uru',
+    img: './img/chelsea.webp'
+}, {
+    partido: "Inglaterra vs Iran",
+    liga: "Copa del Mundo",
+    posibleResultado: '2-0',
+    fecha:'21/11/2022 a las 10:00 uru',
+    img: './img/inglaterra.png'
+}]
+
+
+//Todos los elementos del DOM que voy a necesitar
+const inputMailLogin = document.getElementById('emailLogin'),
+    inputPassLogin = document.getElementById('passwordLogin'),
+    checkRecordar = document.getElementById('recordarme'),
+    btnLogin = document.getElementById('login'),
+    modalEl = document.getElementById('modalLogin'),
+    modal = new bootstrap.Modal(modalEl),
+    contTarjetas = document.getElementById('tarjetas'),
+    elementosToggleables = document.querySelectorAll('.toggeable');
+
+
+//La función de validar se aprovecha del tipo de return que hace el método find (el objeto si lo encuentra, o undefined si no encuentra ninguno que cumpla con la condición)
+function validarUsuario(usersDB, user, pass) {
+    let encontrado = usersDB.find((userDB) => userDB.mail == user);
+    console.log(encontrado)
+    console.log(typeof encontrado)
+
+    if (typeof encontrado === 'undefined') {
+        return false;
+    } else {
+        //si estoy en este punto, quiere decir que el usuario existe, sólo queda comparar la contraseña
+        if (encontrado.pass != pass) {
+            return false;
+        } else {
+            return encontrado;
+        }
+    }
+}
+
+//Después de validar el usuario, guardamos los datos del usuario que recuperamos de la database en el storage, para tener disponible el nombre
+function guardarDatos(usuarioDB, storage) {
+    const usuario = {
+        'name': usuarioDB.nombre,
+        'user': usuarioDB.mail,
+        'pass': usuarioDB.pass
     }
 
-    asignarID(array){
-        this.id = array.lenght; 
-    }
-}
-const partidos = [
-    new Partido('Nacional', 1  , 'Gana', 1),
-    new Partido('Real Madrid', 5, 'Gana', 2),
-    new Partido('Liverpool', 2, 'Pierde', 3),
-    new Partido('Progreso', 0, 'Empata', 4),
-]
-
-console.log(partidos);
-/*
-let continuar = true; 
-
-while(continuar){
-    let ingreso = prompt('Ingresa los datos solcitados: equipo, cantidad de goles, ganador del partido, separados por una barra diagonal (/). Ingresa X para finalizar.');
-    
-    if (ingreso.toUpperCase() == 'X'){
-        continuar = false;
-        break;   
-}
-    const datos = ingreso.split('/');
-    console.log(datos);
-    
-    const partido = new Partido(datos[0],datos[1],datos[2],datos[3],);
-
-    partidos.push(partido);
-    partido.asignarID(partidos);
-    console.log(partidos);
-}
-*/
-let criterio = prompt('Elegi el criterio de busqueda: \n1 - Alfabeticamente (A a Z) \n2 - Alfabeticamente (Z a A) \n3 - Cantidad de goles');
-
-function ordenar(criterio, array){
-    let arrayOrdenado = array.slice(0);
-
-    switch(criterio){
-        case '1':
-        let nombreAscendente = arrayOrdenado.sort((a,b) => a.equipo.localeCompare(b.equipo));
-        return nombreAscendente;
-        case '2':
-            let nombreDescendente = arrayOrdenado.sort((a,b) => b.equipo.localeCompare(a.equipo));
-            return nombreDescendente;
-        case '3':
-            return arrayOrdenado.sort((a,b) => b.goles - a.goles);
-        default:
-            alert ('Opcion incorrecta')
-            return arrayOrdenado;
-    }
+    storage.setItem('usuario', JSON.stringify(usuario));
 }
 
-function crearStringResultado(array){
-    let info = '';
+//Limpiar los storages
+function borrarDatos() {
+    localStorage.clear();
+    sessionStorage.clear();
+}
 
-    array.forEach(elemento => {
-        info+= 'Equipo: '+elemento.equipo +'\nCantidad de Goles: '+elemento.goles +'\nResultado Final: '+elemento.ganador+'\n \n'
+//Recupero los datos que se guardaron en el storage y los retorno
+function recuperarUsuario(storage) {
+    return JSON.parse(storage.getItem('usuario'));
+}
+
+//Cambio el DOM para mostrar el nombre del usuario logueado, usando los datos del storage
+function saludar(usuario) {
+    nombreUsuario.innerHTML = `Bienvenido/a, <span>${usuario.name}</span>`
+}
+
+//Creo HTML dinámico para mostrar la información de los partidos a partir del array fake DB
+function mostrarPartido(array) {
+    contTarjetas.innerHTML = '';
+    array.forEach(element => {
+        let html = `<div class="card cardPartido" id="tarjeta${element.nombre}">
+                <h3 class="card-header" id="nombrePartido">Partido: ${element.partido}</h3>
+                <img src="${element.img}" alt="${element.nombre}" class="card-img-bottom" id="fotoPartido">
+                <div class="card-body">
+                    <p class="card-text" id="liga">Liga: ${element.liga}</p>
+                    <p class="card-text" id="posibleResultado">Posible Resultado: ${element.posibleResultado}</p>
+                    <p class="card-text" id="fecha">Fecha: ${element.fecha}</p>
+                </div>
+            </div>`;
+        contTarjetas.innerHTML += html;
     });
-
-    return info;
 }
 
-alert(crearStringResultado(ordenar(criterio,partidos)));
+//Esta función nos permite intercambiar la visualización de los elementos del DOM, agregando o sacando la clase d-none. Si el elemento la tiene, se la saco, y si no la tiene, se la agrego. La gata Flora de las funciones sería.
+function presentarInfo(array, clase) {
+    array.forEach(element => {
+        element.classList.toggle(clase);
+    });
+}       
+
+
+//Esta función revisa si hay un usuario guardado en el storage, y en ese caso evita todo el proceso de login 
+function estaLogueado(usuario) {
+
+    if (usuario) {
+        saludar(usuario);
+        mostrarPartido(partidos);
+        presentarInfo(elementosToggleables, 'd-none');
+    }
+}
+
+
+btnLogin.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    //Validamos que ambos campos estén completos
+    if (!inputMailLogin.value || !inputPassLogin.value) {
+        alert('Todos los campos son requeridos');
+    } else {
+        //Revisamos si el return de la función validate es un objeto o un boolean. Si es un objeto, fue una validación exitosa y usamos los datos. Si no, informamos por alert.
+        let data = validarUsuario(usuarios, inputMailLogin.value, inputPassLogin.value);
+
+        if (!data) {
+            alert(`Usuario y/o contraseña erróneos`);
+        } else {
+
+            //Revisamos si elige persistir la info aunque se cierre el navegador o no
+            if (checkRecordar.checked) {
+                guardarDatos(data, localStorage);
+                saludar(recuperarUsuario(localStorage));
+            } else {
+                guardarDatos(data, sessionStorage);
+                saludar(recuperarUsuario(sessionStorage));
+            }
+            //Recién ahora cierro el cuadrito de login
+            modal.hide();
+            //Muestro la info para usuarios logueados
+            mostrarPartido(partidos);
+            presentarInfo(elementosToggleables, 'd-none');
+        }
+    }
+});
+
+btnLogout.addEventListener('click', () => {
+    borrarDatos();
+    presentarInfo(elementosToggleables, 'd-none');
+});
+
+estaLogueado(recuperarUsuario(localStorage));
+
+
+
 /*
 
 let userGuardado = 'Homero';
