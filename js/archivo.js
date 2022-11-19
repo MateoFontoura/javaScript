@@ -70,3 +70,13 @@ function crearStringResultado(array){
 
 alert(crearStringResultado(ordenar(criterio,partidos)));
 
+
+
+
+
+
+
+
+
+
+

@@ -36,7 +36,7 @@ const partidos = [{
     img: './img/nacional.webp'
 }, {
     partido: "Uruguay vs Argentina",
-    liga: "Eliminatorias",
+    liga: "Eliminatorias Sudamericanas",
     posibleResultado: '1-2',
     fecha:'05/03/2023 a las 21:00 uru',
     img: './img/argentina.webp'
@@ -117,23 +117,25 @@ function mostrarPartido(array) {
     array.forEach(element => {
         let html = `<div class="card cardPartido" id="tarjeta${element.nombre}">
                 <h3 class="card-header" id="nombrePartido">Partido: ${element.partido}</h3>
-                <img src="${element.img}" alt="${element.nombre}" class="card-img-bottom" id="fotoPartido">
+                <img src="${element.img}" alt="${element.nombre}" class="card-img-bottom img" id="fotoPartido">
                 <div class="card-body">
                     <p class="card-text" id="liga">Liga: ${element.liga}</p>
                     <p class="card-text" id="posibleResultado">Posible Resultado: ${element.posibleResultado}</p>
                     <p class="card-text" id="fecha">Fecha: ${element.fecha}</p>
+                    <input type="button" id="btnApostar" value="Apostar">
                 </div>
             </div>`;
         contTarjetas.innerHTML += html;
     });
 }
 
+
 //Esta función nos permite intercambiar la visualización de los elementos del DOM, agregando o sacando la clase d-none. Si el elemento la tiene, se la saco, y si no la tiene, se la agrego. La gata Flora de las funciones sería.
 function presentarInfo(array, clase) {
     array.forEach(element => {
         element.classList.toggle(clase);
     });
-}       
+};     
 
 
 //Esta función revisa si hay un usuario guardado en el storage, y en ese caso evita todo el proceso de login 
@@ -144,7 +146,7 @@ function estaLogueado(usuario) {
         mostrarPartido(partidos);
         presentarInfo(elementosToggleables, 'd-none');
     }
-}
+};
 
 
 btnLogin.addEventListener('click', (e) => {
@@ -243,3 +245,5 @@ if (nombre()) {
     alert('No sabe el usuario, permiso para apostar denegado.')
 }
 alert('HASTA PRONTO!!!')*/
+
+
