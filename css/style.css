@@ -29,3 +29,23 @@ footer{
 .img{
     height: 130px;
 }
+
+footer{
+    color: #dafab2;
+    background-color: rgb(56, 55, 55);
+    margin-top: 2rem;
+    padding: 5rem;
+    
+}
+
+.d-flex{
+    flex-direction: row-reverse;
+}
+
+.oculta{
+    display: none;
+}
+
+.visible{
+    display: flex;
+}

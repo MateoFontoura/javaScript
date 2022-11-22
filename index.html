@@ -73,14 +73,24 @@
 
         </section>
 
-        <section id="logged" class="d-none toggeable">
+        <section id="logged" class="d-none toggeable cardIngreso">
             <h2>Contenido para usuarios logueados</h2>
-            <p>Partidos disponibles para apostar:</p>
+            <h3>Partidos disponibles para apostar:</h3>
             <div id="tarjetas" class="card-group"></div>
         </section>
+
+        <section class="modal-content confirmacion oculta" id="apuesta">
+            <div>
+                <h3>Ingrese el monto a apostar</h3>                
+                <input>
+                <input type="button" id="btnApostar" value="Apostar">
+            </div>
+        </section>
+
     </main>
     <footer>
-      <h1> Hola gente</h1>
+      <h4> Prohibidas las apuestas para menores de 18 años.Todos los factores, horarios y fechas están sujetos a modificación.
+        </h4>
     </footer>
 
 
@@ -90,5 +100,4 @@
     </script>
 </body>
 
-</html>     
-
+</html>  

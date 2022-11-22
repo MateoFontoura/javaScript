@@ -1,4 +1,5 @@
-
+const  btnApostar = document.getElementById('btnApostar'),
+confirmacion = document.querySelector('.confirmacion');
 
 
 const usuarios = [{
@@ -127,8 +128,12 @@ function mostrarPartido(array) {
             </div>`;
         contTarjetas.innerHTML += html;
     });
-}
+};
+btnApostar.addEventListener('click', () => {
+cardIngreso.classList.replace('visible', 'oculta');
+confirmacion.classList.replace('oculta', 'visible');
 
+})
 
 //Esta función nos permite intercambiar la visualización de los elementos del DOM, agregando o sacando la clase d-none. Si el elemento la tiene, se la saco, y si no la tiene, se la agrego. La gata Flora de las funciones sería.
 function presentarInfo(array, clase) {
