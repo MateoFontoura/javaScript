@@ -28,31 +28,36 @@ const partidos = [{
     liga: "Española",
     posibleResultado: '2-0',
     fecha:'18/12/2022 a las 15:00 uru',
-    img: './img/realmadrid.jpg'
+    img: './img/realmadrid.jpg',
+    id:'reaBar'
 }, {
     partido: "Nacional vs Peñarol",
     liga: "Uruguaya",
     posibleResultado: '1-1',
     fecha:'09/12/2022 a las 17:00 uru',
-    img: './img/nacional.webp'
+    img: './img/nacional.webp',
+    id:'nacPen'
 }, {
     partido: "Uruguay vs Argentina",
     liga: "Eliminatorias Sudamericanas",
     posibleResultado: '1-2',
     fecha:'05/03/2023 a las 21:00 uru',
-    img: './img/argentina.webp'
+    img: './img/argentina.webp',
+    id:'uruArg'
 }, {
     partido: "Chelsea vs Porto",
     liga: "Liga de Campeones",
     posibleResultado: '3-1',
     fecha:'15/12/2022 a las 17:00 uru',
-    img: './img/chelsea.webp'
+    img: './img/chelsea.webp',
+    id:'chePor'
 }, {
     partido: "Inglaterra vs Iran",
     liga: "Copa del Mundo",
     posibleResultado: '2-0',
     fecha:'21/11/2022 a las 10:00 uru',
-    img: './img/inglaterra.png'
+    img: './img/inglaterra.png',
+    id:'ingIra'
 }]
 
 
@@ -60,7 +65,7 @@ const partidos = [{
 const inputMailLogin = document.getElementById('emailLogin'),
     inputPassLogin = document.getElementById('passwordLogin'),
     checkRecordar = document.getElementById('recordarme'),
-    btnLogin = document.getElementById('login'),
+    btnLogin = document.getElementById('login'), 
     modalEl = document.getElementById('modalLogin'),
     modal = new bootstrap.Modal(modalEl),
     contTarjetas = document.getElementById('tarjetas'),
@@ -123,12 +128,31 @@ function mostrarPartido(array) {
                     <p class="card-text" id="liga">Liga: ${element.liga}</p>
                     <p class="card-text" id="posibleResultado">Posible Resultado: ${element.posibleResultado}</p>
                     <p class="card-text" id="fecha">Fecha: ${element.fecha}</p>
-                    <input type="button" id="btnApostar" value="Apostar">
+                    <button id="${element.id}">Apostar</button>
                 </div>
             </div>`;
         contTarjetas.innerHTML += html;
     });
 };
+
+
+//Todos los botones generados con el function MostrarPartidos
+
+const btnreaBar = document.getElementById('reaBar'),
+btnnacPen = document.getElementById('nacPen'),
+btnuruArg = document.getElementById('uruArg'),
+btnchePor = document.getElementById('chePor'),
+btningIra = document.getElementById('login');
+
+/*
+btnnacPen.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+   console.log("hola Mundo");
+    
+ 
+})
+*/
 btnApostar.addEventListener('click', () => {
 cardIngreso.classList.replace('visible', 'oculta');
 confirmacion.classList.replace('oculta', 'visible');
