@@ -68,6 +68,9 @@ const inputMailLogin = document.getElementById('emailLogin'),
     btnLogin = document.getElementById('login'), 
     modalEl = document.getElementById('modalLogin'),
     modal = new bootstrap.Modal(modalEl),
+    modalA = document.getElementById("modalApuesta"),
+    boton = document.getElementById("abrirModal"),
+    span = document.getElementsByClassName("cerrar")[0],
     contTarjetas = document.getElementById('tarjetas'),
     elementosToggleables = document.querySelectorAll('.toggeable');
 
@@ -136,36 +139,20 @@ function mostrarPartido(array) {
     array.forEach((partido) => {
 		const etiqueta = document.getElementById(partido.id);
         console.log(etiqueta);
-
+        
 	});
-    reaBar.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-       alert("hola Mundo");   
-    })
-    nacPen.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-       alert("hola Mundo");   
-    })
-    uruArg.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-       alert("hola Mundo");   
-    })
-    chePor.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-       alert("hola Mundo");   
-    })
-    ingIra.addEventListener('click', (e) => {
-        e.preventDefault();
-        modal
-        alert("hola Mundo"); 
-        
-    })
+
+    array.forEach((partido) => {
+		const etiqueta = document.getElementById(partido.id);
+		etiqueta.addEventListener("click", (e) => {
+			alert('Hola mundo');
+		});
+	});
+
+    
 
 };
+
 
 
 //Todos los botones generados con el function MostrarPartidos
@@ -287,3 +274,22 @@ if (nombre()) {
 alert('HASTA PRONTO!!!')*/
 
 
+
+// Botón que abre el modal
+
+// Hace referencia al elemento <span> que tiene la X que cierra la ventana
+
+
+boton.addEventListener("click",function() {
+    modal.style.display = "block";
+  });
+  // Si el usuario hace clic en la x, la ventana se cierra
+  span.addEventListener("click",function() {
+    modal.style.display = "none";
+  });
+  // Si el usuario hace clic fuera de la ventana, se cierra.
+  window.addEventListener("click",function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  });
