@@ -133,31 +133,42 @@ function mostrarPartido(array) {
             </div>`;
         contTarjetas.innerHTML += html;
     });
+    array.forEach((partido) => {
+		const etiqueta = document.getElementById(partido.id);
+        console.log(etiqueta);
+
+	});
+    reaBar.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+       alert("hola Mundo");   
+    })
+    nacPen.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+       alert("hola Mundo");   
+    })
+    uruArg.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+       alert("hola Mundo");   
+    })
+    chePor.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+       alert("hola Mundo");   
+    })
+    ingIra.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal
+        alert("hola Mundo"); 
+        
+    })
+
 };
 
 
 //Todos los botones generados con el function MostrarPartidos
-
-const btnreaBar = document.getElementById('reaBar'),
-btnnacPen = document.getElementById('nacPen'),
-btnuruArg = document.getElementById('uruArg'),
-btnchePor = document.getElementById('chePor'),
-btningIra = document.getElementById('login');
-
-/*
-btnnacPen.addEventListener('click', (e) => {
-    e.preventDefault();
-    
-   console.log("hola Mundo");
-    
- 
-})
-*/
-btnApostar.addEventListener('click', () => {
-cardIngreso.classList.replace('visible', 'oculta');
-confirmacion.classList.replace('oculta', 'visible');
-
-})
 
 //Esta función nos permite intercambiar la visualización de los elementos del DOM, agregando o sacando la clase d-none. Si el elemento la tiene, se la saco, y si no la tiene, se la agrego. La gata Flora de las funciones sería.
 function presentarInfo(array, clase) {
